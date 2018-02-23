@@ -1,20 +1,34 @@
 var mysql = require("mysql");
+var connection;
 
-var connection = mysql.createConnection({
-  port: 3000,
-  host: "localhost",
-  user: "root",
-  password: "B1gfatfun",
-  database: "burger"
-});
+if(process.env.JAWSDB_URL){
+  connection = mysql.createConnection(process.env.JAWSDB_URL);
+}else{
+  connection = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: 'hacktheplanet',
+    database: 'todoagain_db'
+  });
+};
 
-connection.connect(function(err) {
-  if (err) {
-    console.error("error connecting: " + err.stack);
-    return;
-  }
-
-  console.log("connected as id " + connection.threadId);
-});
-
+connection.connect();
 module.exports = connection;
+// var connection = mysql.createConnection({
+//   port: 3000,
+//   host: "localhost",
+//   user: "root",
+//   password: "B1gfatfun",
+//   database: "burger"
+// });
+
+// connection.connect(function(err) {
+//   if (err) {
+//     console.error("error connecting: " + err.stack);
+//     return;
+//   }
+
+//   console.log("connected as id " + connection.threadId);
+// });
+
+// module.exports = connection;
